@@ -1,0 +1,44 @@
+name: splitly
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: splitly
+      POSTGRES_USER: splitly
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-splitly-local}
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U splitly -d splitly"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  mail:
+    image: axllent/mailpit:v1.27
+    ports:
+      - "127.0.0.1:18025:8025"
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:18090:8080"
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/splitly
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-splitly-local}
+      SMTP_HOST: ${SMTP_HOST:-mail}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_AUTH: ${SMTP_AUTH:-false}
+      SMTP_TLS: ${SMTP_TLS:-false}
+      MAIL_FROM: ${MAIL_FROM:-hello@splitly.local}
+      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:18090}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:5173,http://localhost:18090,capacitor://localhost,https://localhost}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+    depends_on:
+      db:
+        condition: service_healthy
+      mail:
+        condition: service_started
+volumes:
+  database:

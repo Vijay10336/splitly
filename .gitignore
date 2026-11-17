@@ -1,0 +1,27 @@
+.env*
+!.env.example
+frontend/node_modules/
+frontend/dist/
+backend/target/
+**/.DS_Store
+**/.gradle/
+**/build/
+**/local.properties
+**/DerivedData/
+**/Pods/
+**/xcuserdata/
+**/.swiftpm/
+**/Package.resolved
+
+# Local signing credentials and compiler caches
+*.jks
+*.keystore
+*.p12
+*.mobileprovision
+*.pem
+**/.kotlin/
+*.log
+
+# Python smoke-check bytecode
+__pycache__/
+*.pyc

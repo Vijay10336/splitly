@@ -1,0 +1,33 @@
+{
+  "name": "splitly",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "test": "node --test src/ledger.test.js",
+    "native:sync": "npm run build && cap sync",
+    "android": "cap open android",
+    "ios": "cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/app": "^8.0.0",
+    "@capacitor/browser": "^8.0.0",
+    "@capacitor/core": "^8.6.2",
+    "@capacitor/filesystem": "^8.1.5",
+    "@capacitor/ios": "^8.6.2",
+    "@capacitor/preferences": "^8.0.0",
+    "@capacitor/share": "^8.0.3",
+    "lucide-react": "^0.468.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.2",
+    "@vitejs/plugin-react": "^5.1.0",
+    "prettier": "^3.10.1",
+    "vite": "^7.2.2"
+  }
+}

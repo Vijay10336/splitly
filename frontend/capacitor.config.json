@@ -1,0 +1,5 @@
+{
+  "appId": "dev.vijay.splitly", "appName": "Splitly", "webDir": "dist",
+  "server": { "androidScheme": "https" },
+  "ios": { "contentInset": "automatic" }
+}

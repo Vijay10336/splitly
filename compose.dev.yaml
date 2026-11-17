@@ -1,0 +1,8 @@
+# Optional host ports for running Spring Boot directly on your computer.
+services:
+  db:
+    ports:
+      - "127.0.0.1:15432:5432"
+  mail:
+    ports:
+      - "127.0.0.1:11025:1025"
