@@ -1,3 +1,4 @@
+import { ActionButton } from "./ActionButton";
 import React, { useRef, useEffect, useState } from "react";
 import { X, ArrowRight } from "lucide-react";
 
@@ -65,10 +66,10 @@ export function Form({ children, onSubmit, label = "Save", icon = true }) {
           {error}
         </p>
       )}
-      <button className="button full" disabled={busy}>
+      <ActionButton className="button full" disabled={busy}>
         {busy ? "Saving…" : label}
         {icon && <ArrowRight size={17} />}
-      </button>
+      </ActionButton>
     </form>
   );
 }

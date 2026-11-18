@@ -1,3 +1,4 @@
+import { ActionButton } from "./ActionButton";
 import React, { useState } from "react";
 import { Check, Cloud } from "lucide-react";
 import { Brand, Form } from "./components";
@@ -111,7 +112,7 @@ export function AuthScreen({ link, user, onLogin, onClose, onMessage }) {
           )}
           {(mode === "login" || mode === "signup") && (
             <>
-              <button
+              <ActionButton
                 className="button google-button full"
                 disabled={googleBusy}
                 onClick={async () => {
@@ -128,7 +129,7 @@ export function AuthScreen({ link, user, onLogin, onClose, onMessage }) {
               >
                 <span className="google-g">G</span>
                 {googleBusy ? "Opening Google…" : "Continue with Google"}
-              </button>
+              </ActionButton>
               {googleError && (
                 <p className="form-error" role="alert">
                   {googleError}

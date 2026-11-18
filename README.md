@@ -94,3 +94,7 @@ scripts/smoke.py             Full Docker-stack smoke check
 Groups have a fixed member list after creation. Any verified group member can add expenses and record settlements. Recording a settlement updates the ledger. Monetary transfers happen outside the app. There are no expense-edit, deletion, push-notification, or administrative screens yet.
 
 Google's actual account sign-in needs your OAuth credentials. Real email delivery needs your SMTP provider. Store distribution needs your developer accounts, signing configuration, public backend, and store submission work.
+
+## Interface design
+
+The app uses a custom Material UI theme, locally bundled Inter typography, clearer controls, and responsive layouts. See the [design notes and palette](docs/DESIGN.md).

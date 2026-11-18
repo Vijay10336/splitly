@@ -1,3 +1,7 @@
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
+import { theme } from "./theme";
+import "@fontsource-variable/inter";
+import { ActionButton } from "./ActionButton";
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { App as NativeApp } from "@capacitor/app";
@@ -31,6 +35,7 @@ import { AuthScreen } from "./AuthScreen";
 import { GroupScreen } from "./GroupScreen";
 import { GroupForm, ExpenseForm, SettlementForm } from "./forms";
 import "./style.css";
+import "./design.css";
 
 function App() {
   const [bundle, setBundle] = useState(null);
@@ -443,13 +448,13 @@ function App() {
                         : "Not yet"}
                     </strong>
                   </div>
-                  <button
+                  <ActionButton
                     className="button secondary"
                     onClick={() => run(download)}
                   >
                     <Download size={17} />
                     Download JSON backup
-                  </button>
+                  </ActionButton>
                   {pending > 0 && (
                     <button
                       className="text-button danger"
@@ -478,14 +483,14 @@ function App() {
                     Send a JSON backup of your synced groups and expenses to{" "}
                     {user.email}.
                   </p>
-                  <button
+                  <ActionButton
                     className="button secondary"
                     disabled={busy || syncBusy}
                     onClick={() => run(emailBackup)}
                   >
                     <Mail size={17} />
                     Email my backup
-                  </button>
+                  </ActionButton>
                   <small>Backups are sent when you request them.</small>
                 </article>
                 <article className="panel">
@@ -517,14 +522,14 @@ function App() {
                       Resend verification email
                     </button>
                   )}
-                  <button
+                  <ActionButton
                     className="button secondary"
                     disabled={syncBusy}
                     onClick={() => (signedIn() ? sync() : setAuthOpen(true))}
                   >
                     <RefreshCw size={17} />
                     {signedIn() ? "Sync now" : "Sign in to sync"}
-                  </button>
+                  </ActionButton>
                   <button
                     className="text-button danger"
                     disabled={busy || syncBusy}
@@ -540,7 +545,7 @@ function App() {
             <>
               <div className="page-heading">
                 <div>
-                  <p className="eyebrow">A LITTLE LESS OWING</p>
+                  <p className="eyebrow">SHARED EXPENSES</p>
                   <h1>
                     {tab === "groups"
                       ? "Your groups"
@@ -549,13 +554,16 @@ function App() {
                   <p>
                     {tab === "groups"
                       ? "Trips, flatmates, and everything in between."
-                      : "Good company. Expenses kept simple."}
+                      : "Track shared expenses and see who owes what."}
                   </p>
                 </div>
-                <button className="button" onClick={() => setModal("group")}>
+                <ActionButton
+                  className="button"
+                  onClick={() => setModal("group")}
+                >
                   <Plus size={18} />
                   New group
-                </button>
+                </ActionButton>
               </div>
               {tab === "home" && (
                 <section className="summary-grid">
@@ -575,7 +583,7 @@ function App() {
                         <strong>{money(0)}</strong>
                       )}
                     </div>
-                    <small>Good things coming back to you</small>
+                    <small>Outstanding balances from your groups</small>
                   </article>
                   <article className="summary-card peach">
                     <span>
@@ -632,10 +640,13 @@ function App() {
                     <br />
                     We’ll take care of the splitting.
                   </p>
-                  <button className="button" onClick={() => setModal("group")}>
+                  <ActionButton
+                    className="button"
+                    onClick={() => setModal("group")}
+                  >
                     <Plus size={18} />
                     Create your first group
-                  </button>
+                  </ActionButton>
                 </section>
               ) : (
                 <div className="group-grid">
@@ -763,4 +774,10 @@ function App() {
     </div>
   );
 }
-createRoot(document.getElementById("root")).render(<App />);
+createRoot(document.getElementById("root")).render(
+  <StyledEngineProvider injectFirst>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </StyledEngineProvider>,
+);

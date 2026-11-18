@@ -1,3 +1,4 @@
+import { ActionButton } from "./ActionButton";
 import React from "react";
 import { Plus, Wallet, Check, ArrowRight } from "lucide-react";
 import { Avatar } from "./components";
@@ -24,10 +25,10 @@ export function GroupScreen({ group, user, back, add, settle }) {
             {group.currency} · {group.expenses.length} expenses together
           </p>
         </div>
-        <button className="button" onClick={add}>
+        <ActionButton className="button" onClick={add}>
           <Plus size={18} />
           Add expense
-        </button>
+        </ActionButton>
       </div>
       <div className="group-detail">
         <div>
@@ -93,12 +94,12 @@ export function GroupScreen({ group, user, back, add, settle }) {
                   </p>
                   <div>
                     <span>{money(t.amount, group.currency)}</span>
-                    <button
+                    <ActionButton
                       className="button small secondary"
                       onClick={() => settle(t)}
                     >
                       Record payment
-                    </button>
+                    </ActionButton>
                   </div>
                 </div>
               ))
